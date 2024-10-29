@@ -1,0 +1,10 @@
+Flask>=2.3.3
+requests>=2.31.0
+gevent>=23.9.1
+yt-dlp
+moviepy
+pillow
+pytube
+opencv-python-headless
+pafy
+youtube-dl
