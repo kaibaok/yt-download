@@ -1,0 +1,44 @@
+[
+{
+    "domain": ".youtube.com",
+    "expirationDate": 1730262234,
+    "hostOnly": false,
+    "httpOnly": false,
+    "name": "CONSISTENCY",
+    "path": "/",
+    "sameSite": "unspecified",
+    "secure": true,
+    "session": false,
+    "storeId": "1",
+    "value": "AKreu9sCjNR147txedtRystENyKG0LXQzdVpqfTtpVzAB8XxRijpbib_rTGfDwRgQb3I9OFD2-h-awX4UFz6CeN8G-AlGqm72fW9OYGN1bgW4MeBa917UhNfmQ",
+    "id": 1
+},
+{
+    "domain": ".youtube.com",
+    "expirationDate": 1730263425.779404,
+    "hostOnly": false,
+    "httpOnly": true,
+    "name": "GPS",
+    "path": "/",
+    "sameSite": "unspecified",
+    "secure": true,
+    "session": false,
+    "storeId": "1",
+    "value": "1",
+    "id": 2
+},
+{
+    "domain": ".youtube.com",
+    "expirationDate": 1764821627.60424,
+    "hostOnly": false,
+    "httpOnly": false,
+    "name": "PREF",
+    "path": "/",
+    "sameSite": "unspecified",
+    "secure": true,
+    "session": false,
+    "storeId": "1",
+    "value": "tz=Asia.Bangkok",
+    "id": 3
+}
+]

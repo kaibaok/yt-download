@@ -91,6 +91,9 @@
     <script>
         $(document).ready(function() {
             $('#search-form').on('submit', function(event) {
+                $('#result').css('opacity', 1).animate({ opacity: 0 }, 500);
+
+
                 event.preventDefault(); // Prevent the form from submitting the traditional way
 
                 const url = $('#url').val();
@@ -107,6 +110,8 @@
                         is_audio: isAudio
                     }),
                     success: function(response) {
+                        $('#result').html('');
+
                          if(response.data) {
                              response.data.forEach(function(item) {
                                 // Create a new HTML element for each item

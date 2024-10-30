@@ -55,14 +55,17 @@ class Utils:
             # 'progress_hooks': [download_callback],
             'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]' if not is_audio else 'bestaudio/best',
             'ignoreerrors': True,
-            'no_check_certificate': True,
+            # 'no_check_certificate': True,
+            'cookiefile': '/cookies.txt'
         }
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             try:
                 result = ydl.extract_info(url, download=True)
-            except youtube_dl.DownloadError as e:
-                print(f"Error: {e}")
+            except youtube_dl.utils.ExtractorError as e:
+                print(f"Extractor error: {str(e)}")
+            except Exception as e:
+                print(f"An error occurred: {str(e)}")
         return result
 
     @staticmethod
