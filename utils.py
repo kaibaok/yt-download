@@ -54,7 +54,8 @@ class Utils:
             'outtmpl': '{}/{}.{}'.format(output_path, file_name, '%(ext)s'),
             # 'progress_hooks': [download_callback],
             'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]' if not is_audio else 'bestaudio/best',
-            "ignoreerrors": True,
+            'ignoreerrors': True,
+            'no_check_certificate': True,
         }
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
