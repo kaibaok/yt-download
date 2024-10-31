@@ -70,6 +70,28 @@
             opacity: 0; /* Start hidden */
             transition: opacity 0.5s ease; /* Smooth transition for opacity */
         }
+
+        .loading-overlay {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+            z-index: 1000; /* Sit on top */
+            justify-content: center; /* Center the loading content */
+            align-items: center; /* Center the loading content */
+        }
+
+        .loading-overlay.active{
+            display:flex;
+        }
+
+        .loading-content {
+            color: white;
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
@@ -88,11 +110,16 @@
     </div>
     </div>
 
+     <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <p>Loading...</p>
+        </div>
+    </div>
     <script>
         $(document).ready(function() {
             $('#search-form').on('submit', function(event) {
+                $('#loadingOverlay').addClass('active').fadeIn();
                 $('#result').css('opacity', 1).animate({ opacity: 0 }, 500);
-
 
                 event.preventDefault(); // Prevent the form from submitting the traditional way
 
@@ -116,16 +143,21 @@
                              response.data.forEach(function(item) {
                                 // Create a new HTML element for each item
                                 var fileInfo = "<a target='_blank' href='/download-file?file_name="+item.file+"'>File</a><br><br>";
-                                fileInfo += "<a target='_blank' href='/download-file?file_name="+item.mp3+"'>Mp3</a>";
+                                if(item.mp3) {
+                                    fileInfo += "<a target='_blank' href='/download-file?file_name="+item.mp3+"'>Mp3</a>";
+                                }
                                 // Append the new element to the #result div
                                 $('#result').append(fileInfo);
                             });
                           $('#result').css('opacity', 0).animate({ opacity: 1 }, 500);
                         }
+
+                        $('#loadingOverlay').removeClass('active').fadeOut();
                     },
                     error: function(xhr, status, error) {
                         // Handle any errors
                         $('#result').html('An error occurred: ' + error);
+                        $('#loadingOverlay').removeClass('active').fadeOut();
                     }
                 });
             });
