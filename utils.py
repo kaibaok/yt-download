@@ -50,13 +50,15 @@ class Utils:
                     query='&'.join([f'{key}={value[0]}' for key, value in query_params.items()]))
             url = urlunparse(modified_url)
 
+        cookies_file_path = './cookies.txt'
+
         ydl_opts = {
             'outtmpl': '{}/{}.{}'.format(output_path, file_name, '%(ext)s'),
             # 'progress_hooks': [download_callback],
             'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]' if not is_audio else 'bestaudio/best',
             'ignoreerrors': True,
             # 'no_check_certificate': True,
-            'cookiefile': '/cookies.txt'
+            'cookiefile': cookies_file_path if os.path.exists(cookies_file_path) else None,
         }
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:

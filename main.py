@@ -1,6 +1,6 @@
 import json
 import requests
-from flask import Flask, jsonify, request, send_file, Response, stream_with_context, render_template
+from flask import Flask, jsonify, request, send_file, make_response, render_template
 from urllib.parse import urlparse
 from uuid import *
 from utils import Utils
@@ -46,9 +46,34 @@ def clean_all():
     return "clean"
 
 
+@app.route('/set-cookies', methods=['GET', 'POST'])
+def set_cookies():
+
+    if request.method == 'POST':
+        # Assuming you have a way to get cookies from the request
+        cookies = request.form.get('cookies')  # Get cookies from a form input
+        cookies_file_path = 'cookies.txt'
+
+        # Check if the cookies file exists
+        if cookies:
+            # Write cookies to the file if they are provided
+            with open(cookies_file_path, 'w') as f:
+                f.write(cookies)
+        elif not os.path.exists(cookies_file_path):
+            return "No cookies found and cookies.txt does not exist."
+
+        resp = make_response("Cookies set!")
+        resp.set_cookie('youtube_cookies', cookies)  # Set the cookies in Flask
+        return resp
+    else:
+        # If the method is GET, render the HTML form
+        return render_template('set_cookies.html')
+
+
 @app.route('/download-youtube', methods=['POST'])
 def youtube_download():
     try:
+        cookies = request.cookies.get('youtube_cookies')
         params = json.loads(request.data)
         url = params.get('url', '')
         output_path = params.get('output_path', './videos')
