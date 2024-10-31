@@ -73,7 +73,6 @@ def set_cookies():
 @app.route('/download-youtube', methods=['POST'])
 def youtube_download():
     try:
-        cookies = request.cookies.get('youtube_cookies')
         params = json.loads(request.data)
         url = params.get('url', '')
         output_path = params.get('output_path', './videos')

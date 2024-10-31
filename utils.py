@@ -50,7 +50,7 @@ class Utils:
                     query='&'.join([f'{key}={value[0]}' for key, value in query_params.items()]))
             url = urlunparse(modified_url)
 
-        cookies_file_path = './cookies.txt'
+        cookies_file_path = 'cookies.txt'
 
         ydl_opts = {
             'outtmpl': '{}/{}.{}'.format(output_path, file_name, '%(ext)s'),
